@@ -7,14 +7,9 @@ inputs:
   image-tag:
     description: 'Version tag of the image'
     required: true
-  dockerfile-path:
-    description: 'Path to the Dockerfile'
-    required: false
-    default: "Dockerfile"
-  context-path:
-    description: 'Path where to run docker build'
-    required: false
-    default: "."
+  original-name:
+    description: 'original docker fullname image'
+    required: true
   push:
     description: 'Wether to push image or not'
     required: false

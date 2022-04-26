@@ -30,7 +30,7 @@ jobs:
           image-name: test
           image-tag: v1.0.0
           dockerfile-path: ./.tests/Dockerfile
-      - uses: .
+      - uses: ./
         with:
           image-name: test2
           image-tag: v1.0.0
