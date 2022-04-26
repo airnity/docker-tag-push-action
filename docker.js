@@ -54,8 +54,7 @@ const dockerTag = async function (
   await exec.exec("docker", [
     "tag",
     originalImage,
-    imageFullName,
-    contextPath,
+    imageFullName
   ]);
   core.info(out);
   if (error) throw error;
