@@ -1,5 +1,6 @@
 const aws = require("./aws");
 const docker = require("./docker");
+const exec = require("@actions/exec");
 
 test("ecr getToken fake region throw err", async () => {
   await expect(aws.getAuthToken("fake-region")).rejects.toThrow(
@@ -19,12 +20,15 @@ test("docker login", async () => {
 });
 
 jest.setTimeout(30000);
-test("docker build", async () => {
-  await docker.dockerBuild("test:latest", "./.tests/Dockerfile");
+test("docker tag", async () => {
+  await exec.exec("docker", [
+    "build",
+    "-f",
+    "./.tests/Dockerfile",
+    "-t",
+    "test:latest",
+    "."
+  ]);
+  await docker.dockerTag("test2:latest", "test:latest");
 });
 
-test("test injection", async () => {
-  await expect(
-    docker.dockerBuild("test:latest", "./.tests/Dockerfile", ". ; touch toto")
-  ).rejects.toThrow();
-});
